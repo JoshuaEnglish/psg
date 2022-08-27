@@ -139,15 +139,15 @@ grammar_rng = '''
       <attribute name="id"><text/></attribute>
       <oneOrMore>
         <element name="p">
-            <oneOrMore>  
+            <oneOrMore>
               <mixed>
-                  <optional>  
+                  <optional>
                     <element name="xref">
                       <attribute name="id"/>
                     </element>
-                  </optional>  
+                  </optional>
               </mixed>
-            </oneOrMore>  
+            </oneOrMore>
         </element>
       </oneOrMore>
     </element>
@@ -172,6 +172,13 @@ def main():
         description="Generates text based on a context-free grammar"
     )
 
+    parser.add_argument(
+        "--version",
+        action="store_true",
+        default=False,
+        help="List version and quit"
+    )
+
     commands = parser.add_subparsers(title="Commands", dest="command", metavar="")
     #commands.default = 'generate'
     lister = commands.add_parser(
@@ -191,7 +198,10 @@ def main():
     check.add_argument('grammar')
 
     args, extras = parser.parse_known_args()
-    print(args, extras)
+    if args.version:
+        print(__version__)
+        return 0
+
     if args.command == "list":
         print('\n'.join(str(p.stem) for p in grammar_dir.glob("*.xml")))
         sys.exit(0)
@@ -203,7 +213,6 @@ def main():
     if args.command is None:
         generate.parse_args(extras, namespace=args)
 
-    print(args)
     grammar_path = grammar_dir / f"{args.grammar}.xml"
     if not grammar_path.exists():
         sys.exit("No grammar Found")
