@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<grammar>
+    <ref id="recipient">
+        <p>Santa</p>
+        <p>Lucifer</p>
+        <p>Chthulu</p>
+    </ref>
+    <ref id="gift">
+        <p>Atari</p>
+        <p>Rubik's Cube</p>
+        <p>lightspeeder</p>
+    </ref>
+    <ref id="holiday">
+        <p>Festivus</p>
+        <p>New Ad Day</p>
+    </ref>
+    <ref id="letter">
+        <p>Dear <xref id="recipient"/>, 
+           I would like one <xref id="gift"/> for <xref id="holiday"/>. 
+           Thank you.</p>
+    </ref>
+</grammar>
